@@ -30,7 +30,7 @@ const authController=new AuthController(authService)
 app.use('/',authRoutes(authController))
 app.use('/tasks',taskRoutes(taskController))
 app.use(errorHandler);
-
+console.log(process.env.FRONTEND_URL)
 const PORT=process.env.PORT
 app.listen(PORT,()=>{
     console.log(`Server is running on ${PORT}`)
