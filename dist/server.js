@@ -19,7 +19,10 @@ const user_1 = require("./models/user");
 const errorHandler_1 = require("./middleware/errorHandler");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: "http://localhost:5173",
+    origin: [
+        'http://localhost:5173',
+        'https://taskly-frontend-mu.vercel.app'
+    ],
     credentials: true
 }));
 (0, db_1.dbConnection)();
@@ -34,6 +37,7 @@ const authController = new authController_1.AuthController(authService);
 app.use('/', (0, authRoutes_1.authRoutes)(authController));
 app.use('/tasks', (0, taskRoutes_1.taskRoutes)(taskController));
 app.use(errorHandler_1.errorHandler);
+console.log(process.env.FRONTEND_URL);
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`);
